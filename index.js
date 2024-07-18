@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const url = 'https://sinhala.adaderana.lk/sinhala-hot-news.php';
+const url = 'https://www.helakuru.lk/esana';
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
@@ -48,7 +48,7 @@ app.get('/news', async (req, res) => {
       const newsDate = newsArticle.find('.comments span').text().trim();
       const newsTime = newsArticle.find('.comments span').next().text().trim();
       const fullTime = (newsDate + ' ' + newsTime).trim();
-      const newsUrl = 'https://sinhala.adaderana.lk/' + newsArticle.find('h2 a').attr('href');
+      const newsUrl = 'https://www.helakuru.lk/esana/' + newsArticle.find('h2 a').attr('href');
       const newsDescription = await scrapeDescription(newsUrl);
       const imageUrl = await scrapeImage(newsUrl);
       const newsData = {
@@ -57,7 +57,7 @@ app.get('/news', async (req, res) => {
         image: imageUrl,
         time: fullTime,
         new_url: newsUrl,
- powerd_by: "🌴NB DEV SL🌴 ⚠️if yo are use this api give the credits to owner⚠️"     
+ powerd_by: "beta test"     
       };
 
       res.json([newsData]);
